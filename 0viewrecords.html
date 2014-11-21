@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html;charset=UTF-8"/>
+<link rel="shortcut icon" href="images/favicon.png"/>
+<meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+@media screen and (max-width:400px){
+#login{margin: 25px 0 0 -24px !important;width:300px !important;}
+#loginmain{width:300px !important;}
+#socialbut{display:none !important;}
+#wlcm{font-size: 60px !important;}
+}
+#label[accesskey]:after { font-size:30px !important; padding:0 0 5px 0;}
+.keytips{ display:none;}
+label[accesskey]:after {
+  content: " [" attr(accesskey) "]";
+  text-transform: uppercase;
+  color: #fff;
+  font-size: x-large;
+
+  border:solid 1px; color:#000;
+  background-color:#FF0000;
+}
+
+#menumain{float: right;
+margin: 5px 0 5px 0;border-bottom: solid 1px;
+color: gray;
+padding: 0 0 6px 0;}
+
+
+#LoginBackgroundPopup{  
+display:none;  
+position:fixed;  
+
+height:100%;  
+width:100%;  
+top:0;  
+left:0;  
+background:#000000;  
+border:1px solid #cecece;  
+z-index:1;  
+} 
+#popupLogin{  
+display:none;  
+position:fixed;  
+
+margin: -12px 0px 0 10px;
+height: 93.5%;
+width: 96.5%;
+left:0 !important;      
+background:#FFFFFF;  
+border:2px solid #cecece;  
+z-index:2;  
+padding:10px;
+font-size:13px;
+overflow:scroll;
+}
+.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #CFCFCF; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    border: 2px solid #999999; border-radius: 20px;
+    position: absolute; top: 0; bottom: 0; right: 56px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+}
+.oonoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.oonoffswitch-checkbox {
+    display: none;
+}
+.oonoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.oonoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+.oonoffswitch-inner:before, .oonoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.oonoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #CFCFCF; color: #FFFFFF;
+}
+.oonoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.oonoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    border: 2px solid #999999; border-radius: 20px;
+    position: absolute; top: 0; bottom: 0; right: 56px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+}
+
+button.ColVis_Button{
+	position: relative;
+	float: left;
+	margin-right: 3px;
+	padding: 5px 8px;
+	border: 1px solid #999;
+	cursor: pointer;
+	*cursor: hand;
+	font-size: 0.88em;
+	color: black !important;
+	white-space: nowrap;
+
+	-webkit-border-radius: 2px;
+	   -moz-border-radius: 2px;
+	    -ms-border-radius: 2px;
+	     -o-border-radius: 2px;
+	        border-radius: 2px;
+
+	-webkit-box-shadow: 1px 1px 3px #ccc;
+	   -moz-box-shadow: 1px 1px 3px #ccc;
+	    -ms-box-shadow: 1px 1px 3px #ccc;
+	     -o-box-shadow: 1px 1px 3px #ccc;
+	        box-shadow: 1px 1px 3px #ccc;
+
+	
+	background: #ffffff; 
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); 
+	background:    -moz-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); 
+	background:     -ms-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); 
+	background:      -o-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); 
+	background:         linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=0 ); 
+}
+
+button.ColVis_Button {
+	height: 30px;
+	padding: 3px 8px;
+}
+
+button.ColVis_Button::-moz-focus-inner { 
+	border: none !important;
+	padding: 0;
+}
+/* popup 2 Start*/
+.pop-up{position:absolute;top:0;left:-500em}.pop-up:target{position:static;left:0}.popBox{width:250px;background:#fff;position:absolute;left:40%;right:30%;top:25%;bottom:30%;z-index:1;border:1px solid #3a3a3a;-moz-border-radius:12px;border-radius:12px;-webkit-box-shadow:2px 2px 4px #3a3a3a;-moz-box-shadow:2px 2px 4px #3a3a3a;box-shadow:2px 2px 4px #3a3a3a;opacity:0;-webkit-transition:opacity .5s ease-in-out;-moz-transition:opacity .5s ease-in-out;-o-transition:opacity .5s ease-in-out;-ms-transition:opacity .5s ease-in-out;transition:opacity .5s ease-in-out}:target .popBox{position:fixed;opacity:1}.popBox:hover{box-shadow:3px 3px 6px #5a5a5a}.lightbox{display:none;text-indent:-200em;background:#000;opacity:.4;width:100%;height:100%;position:fixed;top:0;left:0;bottom:0;right:0}:target .lightbox{display:block}.close{position:absolute;top:-.75em;right:-.75em;display:block;width:1em;height:1em;font:bold large/1 arial,sans-serif;text-align:center;text-decoration:none;background:#000;border:3px solid #fff;color:#fff;-moz-border-radius:1em;-webkit-border-radius:1em;border-radius:1em;-moz-box-shadow:0 0 1px 1px #3a3a3a;-webkit-box-shadow:0 0 1px 1px #3a3a3a;box-shadow:0 0 1px 1px #3a3a3a}.close:before{content:"X"}.close:hover{box-shadow:0 0 1px 1px #c00;background:#c00}.close span{text-indent:-200em;display:block}.popScroll{position:absolute;top:0;left:5%;right:3%;bottom:3%;overflow-y:auto;padding-right:.5em}
+/* popup 2 End*/
+#jobinfo{border: solid 1px;color: gray;height:auto;clear: right;padding: 10px;margin:10px 0 10px 0;}
+.dv1{float: left;width: 35%;color: #333333;}
+.dv2{float: left;width: 41%;color: #333333;}
+.dv3{color: #333333;}
+.basefrm:hover,.airportfrm:hover,.postcodefrm:hover,.baseto:hover,.airportto:hover,.postcodeto:hover{opacity: 0.5;}
+#loginmain{
+height: 275px;
+margin: 75px auto;
+width: 620px;
+border: solid;
+color: white;
+border-radius: 15px;
+box-shadow: 0px 0px 22px 0px rgba(118, 194, 254, 1);
+background: rgba(255, 255, 255, 0.07);
+}
+/* Social but */
+.icon-button{background-color:rgba(255,255,255,0.21);border-radius:2.6rem;cursor:pointer;display:inline-block;font-size:1.3rem;height:4.6rem;line-height:2.6rem;margin:0 5px;position:relative;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:4.6rem}.icon-button span{border-radius:0;display:block;height:0;left:50%;margin:0;position:absolute;top:50%;-webkit-transition:all .3s;-moz-transition:all .3s;-o-transition:all .3s;transition:all .3s;width:0}.icon-button:hover span{width:4.6rem;height:4.6rem;border-radius:2.6rem;margin:-2.3rem}.icon-button i{background:none;color:#fff;height:2.6rem;left:0;line-height:2.6rem;position:absolute;top:0;-webkit-transition:all .3s;-moz-transition:all .3s;-o-transition:all .3s;transition:all .3s;width:2.6rem;z-index:10}.twitter span{background-color:#4099ff}.facebook span{background-color:#3B5998}.google-plus span{background-color:#db5a3c}.tumblr span{background-color:#34526f}.instagram span{background-color:#517fa4}.youtube span{background-color:#b00}.pinterest span{background-color:#cb2027}.icon-button .icon-twitter{color:#4099ff}.icon-button .icon-facebook{color:#3B5998}.icon-button .fa-tumblr{color:#34526f}.icon-button .icon-google-plus{color:#db5a3c}.icon-button .fa-instagram{color:#517fa4}.icon-button .fa-youtube{color:#b00}.icon-button .fa-pinterest{color:#cb2027}.icon-button:hover .icon-twitter,.icon-button:hover .icon-facebook,.icon-button:hover .icon-google-plus,.icon-button:hover .fa-tumblr,.icon-button:hover .fa-instagram,.icon-button:hover .fa-youtube,.icon-button:hover .fa-pinterest{color:#fff}
+/* End */
+.content,.contentosrm{overflow: scroll;}
+.accordion {
+    font-family:Arial, Helvetica, sans-serif; 
+    margin:0 auto;
+    font-size:14px;
+    border:1px solid #542437;
+    border-radius:10px;
+    width:98%;
+    padding:10px;
+    background:#fff;
+}
+.accordion ul {
+    list-style:none;
+    margin:0;
+    padding:0;    
+}
+.accordion li {
+    margin:0;
+    padding:0;
+}
+.accordion [type=radio], .accordion [type=checkbox] {
+    display:none;
+}
+.accordion label {
+    display:block;
+    font-size:16px;
+    line-height:16px;
+    background:#D95B43;
+    border:1px solid #542437;
+    color:#542437;
+    text-shadow:1px 1px 1px rgba(255,255,255,0.3);
+    font-weight:700;
+    cursor:pointer;
+    text-transform:uppercase;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+}
+.accordion ul li label:hover, .accordion [type=radio]:checked ~ label, .accordion [type=checkbox]:checked ~ label {
+    background:#C02942;
+    color:#FFF;
+    text-shadow:1px 1px 1px rgba(0,0,0,0.5)
+}
+.accordion .content {
+    padding:0 10px;
+    overflow:hidden;
+    border:1px solid #fff; /* Make the border match the background so it fades in nicely */
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+}
+.accordion p {
+    color:#333;
+    margin:0 0 10px;
+}
+.accordion h3 {
+    color:#542437;
+    padding:0;
+    margin:10px 0;
+}
+
+
+/* Vertical */
+.vertical ul li {
+    overflow:hidden;
+    margin:0 0 1px;
+}
+.vertical ul li label {
+    padding:10px;
+}
+.vertical [type=radio]:checked ~ label, .vertical [type=checkbox]:checked ~ label {
+    border-bottom:0;
+}
+.vertical ul li label:hover {
+    border:1px solid #542437; /* We don't want the border to disappear on hover */
+}
+.vertical ul li .content {
+    height:0px;
+    border-top:0;
+}
+.vertical [type=radio]:checked ~ label ~ .content, .vertical [type=checkbox]:checked ~ label ~ .content {
+    height:300px;
+    border:1px solid #542437;
+}
+.accordionosrm {
+    font-family:Arial, Helvetica, sans-serif; 
+    margin:0 auto;
+    font-size:14px;
+    border:1px solid #542437;
+    border-radius:10px;
+    width:98%;
+    padding:10px;
+    background:#fff;
+}
+.accordionosrm ul {
+    list-style:none;
+    margin:0;
+    padding:0;    
+}
+.accordionosrm li {
+    margin:0;
+    padding:0;
+}
+.accordionosrm [type=radio], .accordionosrm [type=checkbox] {
+    display:none;
+}
+.accordionosrm label {
+    display:block;
+    font-size:16px;
+    line-height:16px;
+    background:#D95B43;
+    border:1px solid #542437;
+    color:#542437;
+    text-shadow:1px 1px 1px rgba(255,255,255,0.3);
+    font-weight:700;
+    cursor:pointer;
+    text-transform:uppercase;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+}
+.accordionosrm ul li label:hover, .accordionosrm [type=radio]:checked ~ label, .accordionosrm [type=checkbox]:checked ~ label {
+    background:#C02942;
+    color:#FFF;
+    text-shadow:1px 1px 1px rgba(0,0,0,0.5)
+}
+.accordionosrm .contentosrm {
+    padding:0 10px;
+    overflow:hidden;
+    border:1px solid #fff; /* Make the border match the background so it fades in nicely */
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+}
+.accordionosrm p {
+    color:#333;
+    margin:0 0 10px;
+}
+.accordionosrm h3 {
+    color:#542437;
+    padding:0;
+    margin:10px 0;
+}
+
+
+/* verticalosrm */
+.verticalosrm ul li {
+    overflow:hidden;
+    margin:0 0 1px;
+}
+.verticalosrm ul li label {
+    padding:10px;
+}
+.verticalosrm [type=radio]:checked ~ label, .verticalosrm [type=checkbox]:checked ~ label {
+    border-bottom:0;
+}
+.verticalosrm ul li label:hover {
+    border:1px solid #542437; /* We don't want the border to disappear on hover */
+}
+.verticalosrm ul li .contentosrm {
+    height:0px;
+    border-top:0;
+}
+.verticalosrm [type=radio]:checked ~ label ~ .contentosrm, .verticalosrm [type=checkbox]:checked ~ label ~ .contentosrm {
+    height:300px;
+    border:1px solid #542437;
+}
+</style>
+</head>
+<body id="loginbg" style="background:url(images/bgdot.png);">
+<p id="wlcm" style="display:block;text-align:center; font-size:82px;margin: 0 0 20px 0;color: #fff;text-shadow: 4px 4px 2px rgba(118, 194, 254, 0.38);">Despatch</p><hr>
+<p id="deptchtxt" style="display:none;text-align:center; font-size:xx-large;color: #424242;background: rgb(235, 235, 235);margin: 0 0 10px 0;padding: 20px 0 45px 0;border: solid 1px;">Despatch<br>
+<b id=boldStuff></b> 
+<b style="font-size: large;float: left;margin: 0 0 0 20px;">User ID: </b><label id="userid" style="float: left;margin: 0 0 0 10px;font-size: large;"></label>
+<b style="font-size: large;float: right;margin: 0 75px 0 0;">Office Name: </b><label id="officename" style="float: right;margin: 0 -145px 0 0;font-size: large;"></label>
+</p>
+<div id=loginmain style=" display:block;">
+<p style="margin: 108px 0 0 65px;float: left;font-size: xx-large; color:#FFFFFF;">Please <spn style="color: cornflowerblue;">Login</spn></p>
+<div id=login style="display:none;width: 400px;height: 250px;margin: 25px 0px 0px 230px;">
+<input style="margin: 30px 0 0 47px;padding: 11px 0 8px 5px;width: 250px;background: transparent;border: solid 1px;color: white;font-size: medium;" accesskey=E type=email id=UserEmail placeholder="Email Address"/>
+<label id=label class=keytips for=Email accesskey=E style="float:right;padding: 30px 51px 0 0;"></label>
+<input style="margin: 15px 0 0 47px;padding: 11px 0 8px 5px;width: 250px;background: transparent;border: solid 1px;color: white;font-size: medium;" accesskey=P type=password id=Password placeholder=Password />
+<label id=label class=keytips for=Password accesskey=P style="float:right;padding: 17px 51px 0 0;"></label><br>
+<label id=label class=keytips for=login accesskey=S style="float:right;padding: 17px 51px 0 0;"></label>
+<button onclick="logIn()" style="float: none;margin: 16px 0 0 47px;width: 257px;padding: 10px 0 11px 0;border: 0;color:#fff;background:cornflowerblue;font-size: medium;" accesskey=S />Sign In</button>
+</div></div>
+<div id="socialbut" style="display:block;background: rgba(255, 255, 255, 0.1);height: 100px;padding: 25px 0 0 33%;margin: -20px 0 0 0;"><a href="#" class="icon-button twitter"><i class="icon-twitter"><img src="images/t.png" style="margin: 2px;"></i><span></span></a>
+<a href="#" class="icon-button facebook"><i class="icon-facebook"><img src="images/f.png" style="margin: 2px;"></i><span></span></a>
+<a href="#" class="icon-button google-plus"><i class="icon-google-plus"><img src="images/g.png" style="margin: 2px;"></i><span></span></a>
+<a href="#" class="icon-button youtube"><i class="fa fa-youtube"><img src="images/y.png" style="margin: 2px;"></i><span></span></a>
+<a href="#" class="icon-button pinterest"><i class="fa fa-pinterest"><img src="images/p.png" style="margin: 2px;"></i><span></span></a></div>
+<div id=topmenu style="border: solid 1px;height: 50px;color: gray;margin-bottom: 10px;background-color: #F7F7F7;display: none;">
+<span style="float: left;padding: 15px;">Longest Waiting Auto Despatch</span>
+<div class=onoffswitch style="margin: 8px 0 0 30px;float: left;">
+<input type=checkbox name=onoffswitch class=onoffswitch-checkbox id=myonoffswitch checked>
+<label class=onoffswitch-label for=myonoffswitch>
+<span class=onoffswitch-inner></span>
+<span class=onoffswitch-switch></span>
+</label>
+</div>
+<span style="float: right;padding: 15px;">Closed Driver Despatch</span>
+<div class=oonoffswitch style="margin: 8px 30px 0 0;float: right;">
+<input type=checkbox name=oonoffswitch class=oonoffswitch-checkbox id=myoonoffswitch checked>
+<label class=oonoffswitch-label for=myoonoffswitch>
+<span class=oonoffswitch-inner></span>
+<span class=oonoffswitch-switch></span>
+</label>
+</div>
+<div class=solid style="border-left: solid;height: 50px;width: 2px;margin: 0 auto;color: gray;"></div>
+</div>
+<div id=que style="display:none;height: 100%;border: solid 1px;padding: 10px 0 10px 9px;width: 99%;margin: 0 0 10px 0;color: gray;"></div>
+<div id="jobinfo" style="display:none;">
+<div class="dv1">
+<b>Account: </b><label id="accountinfo"></label><br><br>
+<b>Via: </b><label id="viainfo"></label><br><br>
+<b>Booking No: </b><label id="bookinfo"></label>
+</div>
+<div class="dv2">
+<b>Comment: </b><label id="comtinfo"></label><br><br><br><br>
+<b style="margin-right: 10px;">Customer:</b><label id="custinfo"></label>
+<b style="margin-right: 10px;">Driver:</b><label id="drvinfo"></label>
+<b style="margin-right: 10px;">Booked by:</b><label id="bkedbyinfo"></label>
+</div>
+<div class="dv3">
+<b>Order No: </b><label id="ordinfo"></label><br><br>
+<b>Telephone No: </b><label id="telnoinfo"></label><br><br>
+<b>Flight No: </b><label id="flightnoinfo"></label>
+</div>
+</div>
+<div id=menumain style="display:none; width:100%;">
+<div id=networkconnectivity></div>
+<select style="float:left;height: 30px;-webkit-box-shadow: 1px 1px 3px #999;border-radius: 2px;" name=select id=timeahead onclick="timehash();">
+<option value="15 minutes">15 minutes</option>
+<option value="30 minutes">30 minutes</option>
+<option value="45 minutes">45 minutes</option>
+<option value="all bookings" selected>all bookings</option>
+</select>
+
+
+<div style="float:right;">
+<a href="#">
+<label class=keytips for=EditBooking accesskey=E style="float: right;padding: 1px 2px 0 2px;"></label>
+<button accesskey=E id=Login_PopUp_Link1 class="ColVis_Button ColVis_MasterButton" onclick="cnfrmrtrn()">Edit Booking</button>
+</a></div>
+<div id=popupLogin style="position:fixed !important;">
+<label class=keytips for=Exit accesskey=X style="float: left;padding: 1px 2px 0 2px;"></label>
+<a style="font: -webkit-small-control;font-size: larger;color: black;" accesskey=X onclick="resetme();" href="#" id=popupLoginClose>Exit</a>
+<div id=locationField>
+<input style="width: 99.7%;margin: 10px 0 10px 0;height: 25px;" id=custname placeholder="Enter your Name">
+<input style="width: 99.7%;margin: 10px 0 10px 0;height: 25px;" id=telme placeholder="Enter your mobile or landline">
+<table id=exampleCLI class=display cellspacing=0 width="100%"></table>
+<hr>
+<p>ASAP: <input type=checkbox id=myCheck onchange="asaphidemanual()"></p>
+<p>SWAP: <input type=checkbox id=myreturn onchange="myreturnfn()"></p>
+<input type=date id=medate>
+<input type=time id=metime>
+<hr>
+
+
+
+<div class="accordion vertical">
+    <ul>
+        <li>
+            <input type="checkbox" id="checkbox-1" name="checkbox-accordion" />
+            <label for="checkbox-1" style=" position: relative;">Google Routing</label>
+            <div class="content" style=" overflow: scroll;">
+<hr>
+<div class="hh">
+Account: <select id="selacc" style="padding: 4px 0 6px 5px; width:200px;" onchange="seluser()"></select>
+Account User: <select id="selaccu" style="padding: 4px 0 6px 5px; width:200px;"></select>
+Order No: <input style="width: 72px; padding: 4px 0 6px 5px;margin-left: 10px;" id="orderno" placeholder="Order No">
+Flight No: <input style="width: 72px; padding: 4px 0 6px 5px;margin-left: 10px;" id="flightno" placeholder="Flight No">
+</div>
+               <hr>
+Post Code: <input style="width:50px; padding: 4px 0 6px 5px;" id=drno placeholder="DR NO"/> <input style="padding: 4px 0 6px 5px;" id=postcode name="Post Code" placeholder="Post Code"><button style="float:none;" class="ColVis_Button ColVis_MasterButton" onclick="mystreet();" value=Street>Street</button>
+<input style="padding: 4px 0 6px 5px;" id=streetvalue placeholder=Street readonly />
+<hr><br>
+<input style="width: 99.7%;margin: -8px 0 10px 0;height: 34px;" id=autocomplete placeholder="Enter your pick up address" onclick="pcstrgen(this.id)"></input>
+<div class="basefrm" style="margin: -50px 0 0 88.6%;"><img onclick="basejobfrom()" src="images/baseicon.png" alt="icon" height="40" width="40" /></div>
+<div class="airportto" style="margin: -43px 0 0 91.8%;"><img src="images/airport.png" alt="icon" height="40" width="40" /></div>
+<div class="postcodeto" style="margin: -43px 0 0 95%;"><img src="images/postcode.png" alt="icon" height="40" width="40" /></div>
+<hr>
+<p style="clear: both; margin:0;"><span style="float: left;padding: 10px;margin: 0 0 0 -9px;font-size: large;">Via</span>
+<button style="height:35px; width:35px; margin-right:10px;" class="ColVis_Button ColVis_MasterButton" onclick="addElement()">+</button>
+<button style="height:35px; width:35px;" class="ColVis_Button ColVis_MasterButton" onclick="removeElement()">x</button>
+</p>
+<div id="content" style="margin-top: 53px;"></div>
+<hr>
+<input style="width: 99.7%;margin: 10px 0 10px 0;height: 34px;" id=autocomplete1 placeholder="Enter your drop off address" onclick="pcstrgen(this.id)"></input>
+<div class="baseto" style="margin: -50px 0 0 88.6%;"><img onclick="basejobto()" src="images/baseicon.png" alt="icon" height="40" width="40" /></div>
+<div class="airportto" style="margin: -43px 0 0 91.8%;"><img src="images/airport.png" alt="icon" height="40" width="40" /></div>
+<div class="postcodeto" style="margin: -43px 0 0 95%;"><img src="images/postcode.png" alt="icon" height="40" width="40" /></div>
+<hr>
+            </div>
+        </li>
+        <li>
+    </ul>
+</div>
+
+<br><br>
+
+<div class="accordionosrm verticalosrm">
+    <ul>
+        <li>
+            <input type="checkbox" id="checkbox-2" name="checkbox-accordion" />
+            <label for="checkbox-2" style=" position: relative;">OSRM Routing</label>
+             <div class="contentosrm" style=" overflow: scroll;">
+<hr>
+<div class="hh">
+Account: <select id="selacc" style="padding: 4px 0 6px 5px; width:200px;" onchange="seluser()"></select>
+Account User: <select id="selaccu" style="padding: 4px 0 6px 5px; width:200px;"></select>
+Order No: <input style="width: 72px; padding: 4px 0 6px 5px;margin-left: 10px;" id="orderno" placeholder="Order No">
+Flight No: <input style="width: 72px; padding: 4px 0 6px 5px;margin-left: 10px;" id="flightno" placeholder="Flight No">
+</div>
+               <hr>
+Post Code: <input style="width:50px; padding: 4px 0 6px 5px;" id=drno placeholder="DR NO"/> <input style="padding: 4px 0 6px 5px;" id=postcode name="Post Code" placeholder="Post Code"><button style="float:none;" class="ColVis_Button ColVis_MasterButton" onclick="mystreet();" value=Street>Street</button>
+<input style="padding: 4px 0 6px 5px;" id=streetvalue placeholder=Street readonly />
+<hr><br>
+<input style="width: 99.7%;margin: -8px 0 10px 0;height: 34px;" id=autocomplete placeholder="Enter your pick up address" onclick="pcstrgen(this.id)"></input>
+<div class="basefrm" style="margin: -50px 0 0 88.6%;"><img onclick="basejobfrom()" src="images/baseicon.png" alt="icon" height="40" width="40" /></div>
+<div class="airportto" style="margin: -43px 0 0 91.8%;"><img src="images/airport.png" alt="icon" height="40" width="40" /></div>
+<div class="postcodeto" style="margin: -43px 0 0 95%;"><img src="images/postcode.png" alt="icon" height="40" width="40" /></div>
+<hr>
+<p style="clear: both; margin:0;"><span style="float: left;padding: 10px;margin: 0 0 0 -9px;font-size: large;">Via</span>
+<button style="height:35px; width:35px; margin-right:10px;" class="ColVis_Button ColVis_MasterButton" onclick="addElement()">+</button>
+<button style="height:35px; width:35px;" class="ColVis_Button ColVis_MasterButton" onclick="removeElement()">x</button>
+</p>
+<div id="content" style="margin-top: 53px;"></div>
+<hr>
+<input style="width: 99.7%;margin: 10px 0 10px 0;height: 34px;" id=autocomplete1 placeholder="Enter your drop off address" onclick="pcstrgen(this.id)"></input>
+<div class="baseto" style="margin: -50px 0 0 88.6%;"><img onclick="basejobto()" src="images/baseicon.png" alt="icon" height="40" width="40" /></div>
+<div class="airportto" style="margin: -43px 0 0 91.8%;"><img src="images/airport.png" alt="icon" height="40" width="40" /></div>
+<div class="postcodeto" style="margin: -43px 0 0 95%;"><img src="images/postcode.png" alt="icon" height="40" width="40" /></div>
+<hr>
+            </div>
+        </li>
+        <li>
+    </ul>
+</div>
+
+
+<hr>
+<br>
+<button class="ColVis_Button ColVis_MasterButton" style="margin: 10px 0 15px 0px;" onclick="manualfare()">Manual Fare</button>
+<button class="ColVis_Button ColVis_MasterButton" style="margin: 10px 0 15px 10px;" onclick="noteme()">Driver Note</button>
+</div>
+<div class=select><select style="width: 100%;height: 30px;margin: 10px 0 10px 0;" name=select id=vehicletype onclick="calcRoute();">
+<option value="Saloon Car">Saloon Car</option>
+<option value="Estate Car">Estate Car</option>
+<option value="Executive Car">Executive Car</option>
+<option value=MPV>MPV</option>
+<option value="Low Car">Low Car</option>
+</select></div>
+<div id=total style="text-align: center;margin-top: 3px;font-size: x-large;"></div>
+<button class="ColVis_Button ColVis_MasterButton" style="margin: 10px 0 15px 0;width: 100%;" onclick="neworedit()">Confirm</button>
+<button id="cnfrmrtrn" class="ColVis_Button ColVis_MasterButton" style="display:none;margin: 10px 0 15px 0;width: 100%;" onclick="cleanup();">Confirm Return Booking</button>
+<div id="pop2" class="pop-up">
+<div class="popBox" style="height: 47%;">
+<div class="popScroll">
+<h2>Save Option</h2>
+<button onclick="acceptme()" class="ColVis_Button ColVis_MasterButton" style="width: 100%;height: 30px;margin-bottom: 8px;">accept</button>
+<button onclick="rtnbkg()" class="ColVis_Button ColVis_MasterButton" style="width: 100%;height: 30px;margin-bottom: 8px;">return booking</button>
+<button class="ColVis_Button ColVis_MasterButton" style="width: 100%;height: 30px;margin-bottom: 8px;" onclick="wtnrtn();">wait and return</button>
+<button class="ColVis_Button ColVis_MasterButton" style="width: 100%;height: 30px;margin-bottom: 8px;" onclick="accptndntclr();">accept and don't clear</button>
+<!--<button class="ColVis_Button ColVis_MasterButton" style="width: 100%;height: 30px;margin-bottom: 8px;">regular booking</button>-->
+<button class="ColVis_Button ColVis_MasterButton" style="width: 100%;height: 30px;margin-bottom: 15px;" onclick="rjctbkg();">reject booking</button>
+<a style="font: -webkit-small-control;font-size: larger;color: black;margin: 0 0 0 45px;" onclick="resetme();" href="#"id=popupLoginClose>Back To Booking</a>
+</div>
+</div>
+</div>
+</div>
+<div style="float:right;">
+<a href="#">
+<label class=keytips for=NewBooking accesskey=N style="float: right;padding: 1px 2px 0 2px;"></label>
+<button accesskey=N id=Login_PopUp_Link class="ColVis_Button ColVis_MasterButton" onclick="initialize()">New Booking</button>
+</a></div>
+<div id=LoginBackgroundPopup></div>
+<label class=keytips for=CJ accesskey=C style="float: right;padding: 1px 2px 0 2px;"></label>
+<button style="float: inherit;" class="ColVis_Button ColVis_MasterButton" accesskey=C onclick="canceljob()">Cancel Job</button>
+<label class=keytips for=DL accesskey=D style="float: right;padding: 1px 2px 0 2px;"></label>
+<button style="float: inherit;" class="ColVis_Button ColVis_MasterButton" accesskey=D onclick="AutoD()">Despatch Longest Waiting</button>
+<label class=keytips for=HoldON accesskey=H style="float: right;padding: 1px 2px 0 2px;"></label>
+<button style="float: inherit;" class="ColVis_Button ColVis_MasterButton" accesskey=H onclick="holdme()">Hold ON</button>
+<label class=keytips for=HoldOFF accesskey=F style="float: right;padding: 1px 2px 0 2px;"></label>
+<button style="float: inherit;" class="ColVis_Button ColVis_MasterButton" accesskey=F onclick="holdoff()">Hold OFF</button>
+</div>
+<table id=example class=display cellspacing=0 width="100%"></table>
+<script>function iky(){document.onkeyup=function(event){if(event.keyCode==18){var boxes=document.querySelectorAll('.keytips');for(var x=0;x<boxes.length;x++)
+{boxes[x].style.display="none";}
+console.log("up");}}
+document.onkeydown=function(event){if(event.keyCode==18){var boxes=document.querySelectorAll('.keytips');for(var x=0;x<boxes.length;x++)
+{boxes[x].style.display="block";}
+console.log("down");}}}
+function createdf()
+{var item1=JSON.parse(window.localStorage.curactivebooking);item1["flag"]=0;item1["curstatus"]=userid+officename;item1["office"]=officename;var item={"record":[item1]};window.df.apis.localmongo.createRecords({"table_name":"scarscollection","body":item},function(response){alert("Your booking reference is:"+jobref);getRecords();},crudError);}
+var jobrefedit,jobref;function editme(){selectval();initialize();document.getElementById("autocomplete").value=myobj.fromtovia[0].address;document.getElementById("autocomplete1").value=myobj.fromtovia[1].address;document.getElementById("medate").value=myobj.date;document.getElementById("telme").value=myobj.tel;document.getElementById("metime").value=myobj.time;document.getElementById("custname").value = myobj.custname;document.getElementById("selacc").value = myobj.account;
+document.getElementById("flightno").value = myobj.flightno;
+document.getElementById("orderno").value = myobj.orderno;
+document.getElementById("selaccu").value = myobj.accuser;jobrefedit=myobj.jobref;idedit=myobj._id;switch(myobj.vehicletype)
+{case"S":document.getElementById("vehicletype").value="Saloon Car";break;case"L":document.getElementById("vehicletype").value="Low Car";break;case"E":document.getElementById("vehicletype").value="Estate Car";break;case"M":document.getElementById("vehicletype").value="MPV";break;case"X":document.getElementById("vehicletype").value="Executive Car";break;}
+var numofviaregen=(myobj.fromtovia.length)-2;if(numofviaregen)
+{for(var ib=0;ib<numofviaregen;ib++){addElement();var j=ib+2;var meid="autocomplete"+j;document.getElementById(meid).value=myobj.fromtovia[j].address;}}
+bookingloc=myobj.fromtovia;numofvia=bookingloc.length-2;calcRoute();}
+function cleanupedit()
+{
+checkbase();
+var activebooking={};telcust=document.getElementById("telme").value;emailmevar="";if(telcust==""){alert("please put your contact and press 'Confirm' again");return;}
+var telvalid=telcust.replace(/\W+/g,'');if(telvalid.length<7){alert("Please Enter Telephone Number it's missing some digits and press 'Confirm' again");return;}
+if(calculatedfare==0){alert("please calculate fare");return;}
+var asapjob;
+var curdnt=new Date();
+testtime();
+if (isBST)
+{
+curdnt.addHours(1);
+}
+var currentdatetime=curdnt.toISOString();
+var currentdatetimeparse=Date.parse(currentdatetime);asapjob=document.getElementById("myCheck").checked;if(asapjob)
+{activebooking["datentime"]=currentdatetimeparse;var timearr=currentdatetime.split("T");var timemill=timearr[1].split(".");activebooking["date"]=timearr[0];activebooking["time"]=timemill[0];}
+else
+{var usertime=document.getElementById("metime").value;if(usertime==""){alert("please set time");return;}
+var userdate=document.getElementById("medate").value;if(userdate==""){alert("please set date");return;}
+var combinedatentime=userdate+" "+usertime;
+var fudnt=new Date(combinedatentime);
+testtime();
+if (isBST)
+{
+fudnt.addHours(1);
+}
+
+var futureisodnt=fudnt.toISOString();var futureisodntparse=Date.parse(futureisodnt);if(bookingloc[0]==bookingloc[1]){alert("origin cannot be same as destination");}
+var vmedate=Date.parse(combinedatentime);
+var vnowd=new Date();
+var vnowdate=Date.parse(vnowd);
+
+
+
+var datediff=vmedate-vnowdate;if(datediff<0){alert("past date n time bookings not allowed");return;}
+activebooking["datentime"]=futureisodntparse;var ftimearr=futureisodnt.split("T");var ftimemill=ftimearr[1].split(".");activebooking["date"]=ftimearr[0];activebooking["time"]=ftimemill[0];}
+activebooking["tel"]=telvalid;activebooking["email"]=emailmevar;window.localStorage.setItem("email",JSON.stringify(emailmevar));window.localStorage.setItem("tel",JSON.stringify(telcust));activebooking["fromtovia"]=bookingloc;activebooking["fare"]=calculatedfare;activebooking["vehicletype"]=vehicleclass;jobref=jobrefedit;activebooking["jobref"]=jobref;activebooking["jobmileage"]=jobmileage;activebooking["drvnote"]=drvnote;activebooking["custname"]=document.getElementById("custname").value;activebooking["account"] = document.getElementById("selacc").value;
+activebooking["flightno"] = document.getElementById("flightno").value;
+activebooking["orderno"] = document.getElementById("orderno").value;
+activebooking["accuser"] = document.getElementById("selaccu").value;window.localStorage.setItem("curactivebooking",JSON.stringify(activebooking));editedf();}
+function editedf()
+{var item1=JSON.parse(window.localStorage.curactivebooking);item1["flag"]=0;item1["curstatus"]=userid+officename+"edit";item1["office"]=officename;window.df.apis.localmongo.replaceRecord({"table_name":"scarscollection","id":idedit,"body":item1},function(response){alert("Your booking reference is:"+jobref);getRecords();},crudError);}
+function neworedit(){
+
+checkbase();
+
+if(isedit){cleanupedit();}
+else{cleanup();}}
+function getRecordsCLI(){var teltestvar=document.getElementById("telme").value;var telvalid=teltestvar.replace(/\W+/g,'');if(telvalid.length<7){return;}
+var filterstrCLI="tel='"+telvalid+"'";window.df.apis.localmongo.getRecordsByFilter({"table_name":"scarscollection",filter:filterstrCLI,limit:10,fields:"fromtovia"},function(response){buildItemListCLI(response);},crudError);}
+var metableCLI
+function buildItemListCLI(jsonCLI){var dataSetCLI=[];if(jsonCLI.record.length>0){jsonCLI.record.forEach(function(entry){var formatterCLI=[];formatterCLI.push(entry["fromtovia"][0].address);formatterCLI.push(entry["fromtovia"][1].address);dataSetCLI.push(formatterCLI);});}
+if(dataSetCLI.length){metableCLI=$('#exampleCLI').dataTable({"dom":'TC<"clear">lfrtip',tableTools:{"sRowSelect":"single",},"data":dataSetCLI,"columns":[{"title":"From"},{"title":"To"},]});metableCLI.fnClearTable();}
+if(dataSetCLI.length){metableCLI.fnAddData(dataSetCLI);$('#exampleCLI tr').dblclick(function(){selectvalCLI();});}}
+function selectvalCLI()
+{bookingloc=[];var rowvalCLI=$('#exampleCLI').DataTable().row(".selected").data();document.getElementById('autocomplete').value=rowvalCLI[0];document.getElementById('autocomplete1').value=rowvalCLI[1];var CLIobjfrom={};var CLIobjto={};CLIobjfrom.address=rowvalCLI[0];bookingloc.push(CLIobjfrom);CLIobjto.address=rowvalCLI[1];bookingloc.push(CLIobjto);calcRoute();metableCLI.fnClearTable();document.getElementById("telme").readOnly=true;$('#telme').off('keyup');}
+var streetname,mylat,mylng,mypostcode;var getJSON=function(url){return new Promise(function(resolve,reject){var xhr=new XMLHttpRequest();xhr.open('get',url,true);xhr.responseType='json';xhr.onload=function(){var status=xhr.status;if(status==200){resolve(xhr.response);}else{reject(status);}};xhr.send();});};function ipostcode2streetname(mypostcode){mypostcode=mypostcode.toUpperCase().trim();var myurl='https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:'+mypostcode;getJSON(myurl).then(function(data){mylat=data.results[0].geometry.location.lat;mylng=data.results[0].geometry.location.lng;var myurl1='https://maps.googleapis.com/maps/api/geocode/json?latlng='+mylat+','+mylng;getJSON(myurl1).then(function(data){streetname=data.results[0].address_components[1].long_name;var drno=document.getElementById("drno").value;document.getElementById("streetvalue").value=drno+" "+streetname;},function(status){alert('Err');});},function(status){alert('Err.');});}
+function mystreet(){ipostcode2streetname(document.getElementById("postcode").value);}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
+<script src=jquery-1.11.1.min.js></script>
+<script src=jquery.dataTables.js></script>
+<script src=scarsold.js></script>
+<script src='lib/shred.bundle.js'></script>
+<script src='lib/swagger.js'></script>
+<script src='lib/sdk-init.js'></script>
+<script src=dataTables.colReorder.js></script>
+<script src=dataTables.colVis.js></script>
+<script src=dataTables.tableTools.js></script>
+<script src=app.js></script>
+<script src=socket.io.min.js></script>
+<script>
+
+$(document).keyup(function(e) {
+  if(isedit){return;} //don't run pop up menu when editing
+  if (e.keyCode == 27) { window.location.href='#pop2';$("#pop2").fadeIn("slow"); }   // esc
+});
+
+function acceptme() {
+cleanup();
+resetme();
+$("#LoginBackgroundPopup").fadeOut("slow");
+$("#popupLogin").fadeOut("slow");
+popupStatus = 0;
+}
+
+function rtnbkg() {
+cleanup();
+//swap
+document.getElementById("myreturn").checked=true;
+myreturnfn();
+document.getElementById("myCheck").checked=false;
+asaphidemanual();
+$("#pop2").fadeOut("slow");
+}
+
+function rjctbkg(){
+resetme();
+$("#LoginBackgroundPopup").fadeOut("slow");
+$("#popupLogin").fadeOut("slow");
+popupStatus = 0;
+}
+
+function accptndntclr(){
+neworedit();
+$("#pop2").fadeOut("slow");
+}
+
+function wtnrtn(){
+wnrcalcfare=parseInt(calculatedfare)*1.5;
+calculatedfare=wnrcalcfare.toString();
+wnrcalcjmil=parseInt(jobmileage)*2;
+jobmileage=wnrcalcjmil.toString();
+drvnote="Wait n Return";
+cleanup();
+resetme();
+$("#LoginBackgroundPopup").fadeOut("slow");
+$("#popupLogin").fadeOut("slow");
+popupStatus = 0;
+}
+/////////////
+var acc;
+var accar=[];
+
+function getacc(){
+var myfilterstr="office='"+officename+"'";
+window.df.apis.localmongo.getRecordsByFilter({"table_name":"account",filter: myfilterstr},function(response){
+         accar=[];         
+         acc=response;
+         var myaccrec=acc.record;
+         myaccrec.forEach(function(entry){
+         accar.push(entry.name);
+
+});
+       accselfn();  
+    }, crudError
+    );
+}
+function accselfn(){
+var select = document.getElementById("selacc");
+while (select.firstElementChild) {
+    select.removeChild(select.firstElementChild);
+}
+for(var i = 0; i < accar.length; i++) {
+    var opt = accar[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    select.appendChild(el);
+}
+
+}
+//////////////
+//////////////////////object lookup///////////////////
+function seluser(){
+var mearray=acc.record;
+name=document.getElementById("selacc").value;
+var lookup = {};
+for (var i = 0, len = mearray.length; i < len; i++) {
+    lookup[mearray[i].name] = mearray[i];
+}
+accuserar=lookup[name].user.split(",");
+accuselfn();
+}
+//////////////////////////
+function accuselfn(){
+var select = document.getElementById("selaccu");
+while (select.firstElementChild) {
+    select.removeChild(select.firstElementChild);
+}
+for(var i = 0; i < accuserar.length; i++) {
+    var opt = accuserar[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    select.appendChild(el);
+}
+}
+
+////////////////////check for base tel/////////////////
+function checkbase()
+{
+if (telcust=="") {
+if (bookingloc[0].address =="base"  ){ 
+document.getElementById("telme").readOnly=false;
+document.getElementById("telme").value="00000000";telcust="00000000";
+document.getElementById("telme").readOnly=true;
+}
+if (bookingloc[1].address =="base" ){
+document.getElementById("telme").readOnly=false;
+document.getElementById("telme").value="00000000";telcust="00000000";
+document.getElementById("telme").readOnly=true;
+}
+}
+}
+///via postcode
+function pcstrgen(elemid) {
+     
+    var strname=document.getElementById("streetvalue").value;
+    if(strname!="")
+    {
+   
+    document.getElementById(elemid).value = document.getElementById("streetvalue").value;
+    google.maps.event.trigger(document.getElementById(elemid), 'focus', {});
+    document.getElementById("streetvalue").value="";
+    }
+}
+
+var isBST=0; 
+function testtime(){
+var ddd = new Date();
+
+var offset = ddd.getTimezoneOffset(); 
+var zoneoff=offset/60;
+if (zoneoff==-1)
+{
+//BST 
+//time add +1 hour
+//alert(new Date().addHours(1));
+isBST=1;
+}
+if (zoneoff==0)
+{
+isBST=0;
+}
+}
+function cnfrmrtrn(){document.getElementById("cnfrmrtrn").style.display = "block";}
+</script>
+<link rel=stylesheet type="text/css" href=combine.css>
+</body>
+</html>
